@@ -21,6 +21,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using SitemapConverter.Properties;
 
 namespace SitemapConverter
 {
@@ -84,6 +85,11 @@ namespace SitemapConverter
             {
                 _boxGoogleSitemap.Text = _dlgSaveFile.FileName;
             }
+        }
+
+        private void _form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }
