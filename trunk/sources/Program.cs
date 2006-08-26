@@ -29,11 +29,61 @@ namespace SitemapConverter
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static int Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new _form());
+            int exitCode = 0;
+            if (args.Length >= 3)
+            {
+                try
+                {
+                    string aspSitemap = args[0];
+                    string domain = args[1];
+                    string googleSitemap = args[2];
+
+                    Converter converter = new Converter(domain);
+                    converter.Process(aspSitemap, googleSitemap);
+
+                }
+                catch (Exception ex)
+                {
+                    bool silent = false;
+                    if (args.Length >= 4)
+                    {
+                        bool.TryParse(args[3], out silent);
+                    }
+
+                    if (! silent)
+                    {
+                        MessageBox.Show(ex.ToString(), "Converter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    exitCode = 1;
+                }                
+            }
+            else
+            {
+                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+                
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                _form form = new _form();
+                Application.Run(form);
+            }
+
+            return exitCode;
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject.GetType().Equals(typeof(System.Configuration.ConfigurationErrorsException)))
+            {
+                MessageBox.Show("Make sure there is \'SitemapConverter.exe.config\' near the executable." + 
+                                Environment.NewLine + Environment.NewLine + e.ExceptionObject.ToString());
+            }
+            else
+            {
+                MessageBox.Show(e.ExceptionObject.ToString());
+            }
         }
     }
 }
