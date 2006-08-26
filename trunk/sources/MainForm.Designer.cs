@@ -32,15 +32,15 @@ namespace SitemapConverter
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this._btnAspSitemap = new System.Windows.Forms.Button();
-            this._boxAspSitemap = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this._boxDomainName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._btnGoogleSitemap = new System.Windows.Forms.Button();
             this._boxGoogleSitemap = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this._dlgOpenFile = new System.Windows.Forms.OpenFileDialog();
             this._dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
+            this._boxAspSitemap = new System.Windows.Forms.TextBox();
+            this._boxDomainName = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -97,14 +97,6 @@ namespace SitemapConverter
             this._btnAspSitemap.UseVisualStyleBackColor = true;
             this._btnAspSitemap.Click += new System.EventHandler(this._btnAspSitemap_Click);
             // 
-            // _boxAspSitemap
-            // 
-            this._boxAspSitemap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this._boxAspSitemap.Location = new System.Drawing.Point(9, 19);
-            this._boxAspSitemap.Name = "_boxAspSitemap";
-            this._boxAspSitemap.Size = new System.Drawing.Size(271, 21);
-            this._boxAspSitemap.TabIndex = 0;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this._boxDomainName);
@@ -114,14 +106,6 @@ namespace SitemapConverter
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Enter domain name";
-            // 
-            // _boxDomainName
-            // 
-            this._boxDomainName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this._boxDomainName.Location = new System.Drawing.Point(9, 19);
-            this._boxDomainName.Name = "_boxDomainName";
-            this._boxDomainName.Size = new System.Drawing.Size(303, 21);
-            this._boxDomainName.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -150,10 +134,12 @@ namespace SitemapConverter
             // _boxGoogleSitemap
             // 
             this._boxGoogleSitemap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._boxGoogleSitemap.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SitemapConverter.Properties.Settings.Default, "GoogleSitemap", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this._boxGoogleSitemap.Location = new System.Drawing.Point(9, 19);
             this._boxGoogleSitemap.Name = "_boxGoogleSitemap";
             this._boxGoogleSitemap.Size = new System.Drawing.Size(271, 21);
             this._boxGoogleSitemap.TabIndex = 0;
+            this._boxGoogleSitemap.Text = global::SitemapConverter.Properties.Settings.Default.GoogleSitemap;
             // 
             // panel1
             // 
@@ -173,6 +159,26 @@ namespace SitemapConverter
             this._dlgSaveFile.FileName = "sitemap.xml";
             this._dlgSaveFile.Title = "Set name of output google sitemap";
             // 
+            // _boxAspSitemap
+            // 
+            this._boxAspSitemap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._boxAspSitemap.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SitemapConverter.Properties.Settings.Default, "AspNetSitemap", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this._boxAspSitemap.Location = new System.Drawing.Point(9, 19);
+            this._boxAspSitemap.Name = "_boxAspSitemap";
+            this._boxAspSitemap.Size = new System.Drawing.Size(271, 21);
+            this._boxAspSitemap.TabIndex = 0;
+            this._boxAspSitemap.Text = global::SitemapConverter.Properties.Settings.Default.AspNetSitemap;
+            // 
+            // _boxDomainName
+            // 
+            this._boxDomainName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._boxDomainName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::SitemapConverter.Properties.Settings.Default, "DomainName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this._boxDomainName.Location = new System.Drawing.Point(9, 19);
+            this._boxDomainName.Name = "_boxDomainName";
+            this._boxDomainName.Size = new System.Drawing.Size(303, 21);
+            this._boxDomainName.TabIndex = 0;
+            this._boxDomainName.Text = global::SitemapConverter.Properties.Settings.Default.DomainName;
+            // 
             // _form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +190,7 @@ namespace SitemapConverter
             this.MaximizeBox = false;
             this.Name = "_form";
             this.Text = "Sitemap converter (ASP.NET -> Google)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this._form_FormClosing);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
