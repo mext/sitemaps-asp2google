@@ -25,8 +25,14 @@ using SitemapConverter.Properties;
 
 namespace SitemapConverter
 {
+    /// <summary>
+    /// Main form
+    /// </summary>
     public partial class _form : Form
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public _form()
         {
             InitializeComponent();
@@ -41,7 +47,13 @@ namespace SitemapConverter
             StartProcessing(aspSitemap, domain, googleSitemap);
         }
 
-        private void StartProcessing(string aspSitemap, string domain, string googleSitemap)
+        /// <summary>
+        /// Starts the processing.
+        /// </summary>
+        /// <param name="aspSitemap">The ASP sitemap.</param>
+        /// <param name="domain">The domain.</param>
+        /// <param name="googleSitemap">The google sitemap.</param>
+        internal void StartProcessing(string aspSitemap, string domain, string googleSitemap)
         {
             while (true)
             {
@@ -90,6 +102,16 @@ namespace SitemapConverter
         private void _form_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.Save();
+        }
+
+        private void _linkDigizzle_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.digizzle.com?from=converter");
+        }
+
+        private void _form_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
